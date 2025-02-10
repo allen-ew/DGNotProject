@@ -11,10 +11,6 @@
   <ItemGroup>
     <Folder Include="BusinessLogic\" />
     <Folder Include="DataAccess\Models\" />
-    <Folder Include="DataAccess\DTOs\" />
-    <Folder Include="DataAccess\Interfaces\" />
-    <Folder Include="DataAccess\Repositories\" />
-    <Folder Include="Shared\Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
