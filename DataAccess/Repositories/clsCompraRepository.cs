@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DgNotification.DataAccess.Interfaces
+namespace DgNotification.DataAccess.Repositories
 {
-    internal interface ICliente
+    public class clsCompraRepository
     {
-
+        //Migrar BD
     }
 }

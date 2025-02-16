@@ -24,6 +24,7 @@ namespace DgNotification.DataAccess.Models
         public string Direccion { get; set; }
         [Required]
         public DateTime FechaNacimiento { get; set; }
+        public bool Activo { get; set; } = true;
 
         //Relaciones
         public ICollection<clsCompra> Compras { get; set; }

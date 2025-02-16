@@ -8,5 +8,6 @@ namespace DgNotification.DataAccess.DTOs
 {
     public class clsClienteDTO
     {
+
     }
 }

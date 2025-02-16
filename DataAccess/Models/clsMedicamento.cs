@@ -16,6 +16,7 @@ namespace DgNotification.DataAccess.Models
 
         [Required]
         public decimal Precio { get; set; }
+        public bool Activo { get; set; } = true;
 
         //Relaciones
 
