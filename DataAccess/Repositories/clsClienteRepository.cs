@@ -40,8 +40,7 @@ namespace DgNotification.DataAccess.Repositories
         {
             try
             {
-                var vString = "Clientes";
-                var vCliente = await _context.cl.FindAsync(id);
+                var vCliente = await _context.Clientes.FindAsync(id);
                 return vCliente != null
                     ? clsOperationResult.SuccessResult("Cliente por id obtenido correctamente.", vCliente)
                     : clsOperationResult.FailureResult("No se encontro el cliente con el id especificado.");
@@ -60,7 +59,7 @@ namespace DgNotification.DataAccess.Repositories
                 if (entity == null) return clsOperationResult.FailureResult("El cliente no puede ser nulo.");
                 await _context.Clientes.AddAsync(entity);
                 await _context.SaveChangesAsync();
-                return clsOperationResult.SuccessResult("Cliente agregado exitosamente.", entity);
+                return clsOperationResult.SuccessResult("Cliente agregado correctamente.", entity);
             }
             catch (Exception ex)
             {
@@ -76,7 +75,7 @@ namespace DgNotification.DataAccess.Repositories
                 if(vCliente == null) return clsOperationResult.FailureResult("El cliente no existe.");
                 _context.Clientes.Update(vCliente);
                 await _context.SaveChangesAsync();
-                return clsOperationResult.SuccessResult("Cliente agregado exitosamente.", entity);
+                return clsOperationResult.SuccessResult("Cliente actualizado correctamente.", entity);
             }
             catch (Exception ex)
             {
@@ -92,7 +91,7 @@ namespace DgNotification.DataAccess.Repositories
                 if (vCliente == null) return clsOperationResult.FailureResult("El cliente no existe.");
                 _context.Clientes.Remove(vCliente);
                 await _context.SaveChangesAsync();
-                return clsOperationResult.SuccessResult("El cliente fue eliminado con exito.");
+                return clsOperationResult.SuccessResult("El cliente fue eliminado correctamente.");
 
             }
             catch (Exception ex)

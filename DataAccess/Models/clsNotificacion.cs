@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DgNotification.DataAccess.Enums;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,6 +11,7 @@ namespace DgNotification.DataAccess.Models
 {
     public class clsNotificacion
     {
+
         public int Id { get; set; }
 
         [ForeignKey("Cliente")]
@@ -22,7 +24,7 @@ namespace DgNotification.DataAccess.Models
         [Required]
         public DateTime FechaNotificacion { get; set; }
         [Required]
-        public bool Notificada { get; set; }
+        public NotificacionEstado Estado { get; set; }
 
     }
 }

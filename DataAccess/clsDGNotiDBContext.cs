@@ -1,4 +1,5 @@
-﻿using DgNotification.DataAccess.Models;
+﻿using DgNotification.DataAccess.Enums;
+using DgNotification.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,9 @@ using System.Threading.Tasks;
 
 namespace DgNotification.DataAccess
 {
-    public class clsDGNotiDBContext :DbContext
+    public class clsDGNotiDBContext : DbContext
     {
-        public clsDGNotiDBContext(DbContextOptions <clsDGNotiDBContext> dbContextOptions):base(dbContextOptions) { }  
+        public clsDGNotiDBContext(DbContextOptions<clsDGNotiDBContext> dbContextOptions) : base(dbContextOptions) { }
         public DbSet<clsCliente> Clientes { get; set; }
         public DbSet<clsCompra> Compras { get; set; }
         public DbSet<clsMedicamento> Medicamentos { get; set; }
@@ -25,6 +26,15 @@ namespace DgNotification.DataAccess
             modelBuilder.Entity<clsCliente>().HasIndex(c => c.Cedula).IsUnique(); modelBuilder.Entity<clsMedicamento>()
             .Property(m => m.Precio)
             .HasColumnType("DECIMAL(18, 2)");
+
+            modelBuilder.Entity<clsCompra>()
+                .Property(c => c.PrecioUnitario)
+                .HasColumnType("DECIMAL(18, 2)");
+
+            modelBuilder.Entity<clsNotificacion>()
+                .Property(n => n.Estado)
+                .HasDefaultValue(NotificacionEstado.Pendiente)
+                .HasSentinel(NotificacionEstado.Pendiente);
 
             //Configuramos el nombre a las tablas
             modelBuilder.Entity<clsCliente>().ToTable("Cliente");

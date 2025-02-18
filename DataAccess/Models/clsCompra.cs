@@ -27,6 +27,6 @@ namespace DgNotification.DataAccess.Models
         [Required]
         public int CantidadComprada { get; set; }
         [Required]
-        public int PrecioUnitario { get; set; }
+        public decimal PrecioUnitario { get; set; }
     }
 }
