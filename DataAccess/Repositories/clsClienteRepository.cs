@@ -1,4 +1,4 @@
-﻿using DgNotification.DataAccess.Interfaces;
+﻿using DgNotification.DataAccess.Interfaces.Repository;
 using DgNotification.DataAccess.Models;
 using DgNotification.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DgNotification.DataAccess.Repositories
 {
-    public class clsClienteRepository : IGeneric<clsCliente>
+    public class clsClienteRepository : IClienteRepository
     {
         private readonly clsDGNotiDBContext _context;
 
@@ -18,7 +18,7 @@ namespace DgNotification.DataAccess.Repositories
         {
             _context = prmContext;
         }
-        //Posible mejora (Repositorio generico)
+        
         public async Task<clsOperationResult> GetAllAsync()
         {
             try
@@ -101,7 +101,23 @@ namespace DgNotification.DataAccess.Repositories
             }
             
         }
+        public async Task<clsOperationResult> CambiarEstado(int id, bool estado)
+        {
+            try
+            {
+                var vCliente = await _context.Clientes.FindAsync(id);
+                if (vCliente == null) return clsOperationResult.FailureResult("El cliente no existe.");
+                vCliente.Activo = estado;
+                _context.Clientes.Update(vCliente);
+                await _context.SaveChangesAsync();
+                return clsOperationResult.SuccessResult("El estado del cliente fue cambiado correctamente.", vCliente);
+            }
+            catch (Exception ex)
+            {
+                return clsOperationResult.FailureResult("Error al cambiar el estado del cliente: " + ex.Message);
+            }
+        }
 
-        
+
     }
 }

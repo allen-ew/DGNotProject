@@ -1,4 +1,4 @@
-﻿using DgNotification.DataAccess.Interfaces;
+﻿using DgNotification.DataAccess.Interfaces.Repository;
 using DgNotification.DataAccess.Models;
 using DgNotification.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DgNotification.DataAccess.Repositories
 {
-    public class clsCompraRepository : IGeneric<clsCompra>
+    public class clsCompraRepository : ICompraRepository
     {
         
         private readonly clsDGNotiDBContext _context;

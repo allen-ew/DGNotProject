@@ -1,4 +1,9 @@
 using DgNotification.DataAccess;
+using DgNotification.DataAccess.Interfaces.Repository;
+using DgNotification.DataAccess.Interfaces.Services;
+using DgNotification.DataAccess.Models;
+using DgNotification.DataAccess.Repositories;
+using DgNotification.DataAccess.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,16 +15,13 @@ namespace DgNotification
 {
     public static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
+        // ...
+
         [STAThread]
         static void Main()
         {
-
             // Inicializar la configuración de Windows Forms para que pueda funcionar correctamente
             ApplicationConfiguration.Initialize();
-
 
             //Configuracion DI y HostBuilder
             using var host = Host.CreateDefaultBuilder()
@@ -32,26 +34,39 @@ namespace DgNotification
                         .Build();
 
                     // Obtener la cadena de conexión
-                    string connectionString = config.GetConnectionString("DGNotDDBB");
+                    string? connectionString = config.GetConnectionString("DGNotDDBB");
+
+                    if (connectionString == null)
+                    {
+                        throw new InvalidOperationException("La cadena de conexión no puede ser nula.");
+                    }
 
                     // Agregar Entity Framework con SQL Server
                     services.AddDbContext<clsDGNotiDBContext>(options =>
                         options.UseSqlServer(connectionString));
 
-                    // Registrar servicios
+                    // Registrar Repositorios
+                    services.AddScoped<IClienteRepository, clsClienteRepository>();
+                    services.AddScoped<ICompraRepository, clsCompraRepository>();
+                    services.AddScoped<IMedicamentoRepository, clsMedicamentoRepository>();
+                    services.AddScoped<IMedicamentoFrecuenciaRepository, clsMedicamentoFrecuenciaRepository>();
+                    services.AddScoped<INotificacionRepository, clsNotificacionRepository>();
+
+                    // Registrar Servicios
+                    services.AddScoped<IClienteService, clsClienteService>();
+                    services.AddScoped<ICompraService, clsCompraService>();
+                    services.AddScoped<IMedicamentoService, clsMedicamentoService>();
+                    services.AddScoped<IMedicamentoFrecuenciaService, clsMedicamentoFrecuenciaService>();
+                    services.AddScoped<INotificacionService, clsNotificacionService>();
 
                     // Registrar el formulario principal
                     services.AddScoped<Form1>();
                 })
                 .Build();
 
-
             var form1 = host.Services.GetRequiredService<Form1>();
-   
+
             Application.Run(form1);
-
-
-
         }
 
 

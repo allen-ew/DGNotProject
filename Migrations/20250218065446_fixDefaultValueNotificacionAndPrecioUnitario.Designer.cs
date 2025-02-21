@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DgNotification.Migrations
 {
     [DbContext(typeof(clsDGNotiDBContext))]
-    [Migration("20250218065446_fixDefaultValueNotificacionAndPrecioUnitario")]
-    partial class fixDefaultValueNotificacionAndPrecioUnitario
+    [Migration("20250218065446_FixDefaultValueNotificacionAndPrecioUnitario")]
+    partial class FixDefaultValueNotificacionAndPrecioUnitario
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

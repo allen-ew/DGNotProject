@@ -35,13 +35,6 @@ namespace DgNotification.DataAccess
                 .Property(n => n.Estado)
                 .HasDefaultValue(NotificacionEstado.Pendiente)
                 .HasSentinel(NotificacionEstado.Pendiente);
-
-            //Configuramos el nombre a las tablas
-            modelBuilder.Entity<clsCliente>().ToTable("Cliente");
-            modelBuilder.Entity<clsCompra>().ToTable("Compra");
-            modelBuilder.Entity<clsMedicamento>().ToTable("Medicamento");
-            modelBuilder.Entity<clsMedicamentoFrecuencia>().ToTable("MedicamentoFrecuencia");
-            modelBuilder.Entity<clsNotificacion>().ToTable("Notificacion");
         }
     }
 }

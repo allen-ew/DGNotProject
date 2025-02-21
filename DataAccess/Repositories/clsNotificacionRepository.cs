@@ -1,4 +1,5 @@
-﻿using DgNotification.DataAccess.Interfaces;
+﻿using DgNotification.DataAccess.Enums;
+using DgNotification.DataAccess.Interfaces.Repository;
 using DgNotification.DataAccess.Models;
 using DgNotification.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DgNotification.DataAccess.Repositories
 {
-    public class clsNotificacionRepository : IGeneric<clsNotificacion>
+    public class clsNotificacionRepository : INotificacionRepository
     {
         private readonly clsDGNotiDBContext _context;
         public clsNotificacionRepository(clsDGNotiDBContext prmContext)
@@ -95,6 +96,23 @@ namespace DgNotification.DataAccess.Repositories
             catch (Exception ex)
             {
                 return clsOperationResult.FailureResult("Error al eliminar notificacion: " + ex.Message);
+            }
+        }
+        public async Task<clsOperationResult> CambiarEstado(int id, NotificacionEstado estado)
+        {
+            try
+            {
+                var vNotificacion = await _context.Notificaciones.FindAsync(id);
+                if (vNotificacion == null) return clsOperationResult.FailureResult("La notificacion no existe.");
+                vNotificacion.Estado = estado;
+                _context.Notificaciones.Update(vNotificacion);
+                await _context.SaveChangesAsync();
+                return clsOperationResult.SuccessResult("El estado de la notificacion fue cambiado correctamente.", vNotificacion);
+            }
+            catch (Exception ex)
+            {
+
+                return clsOperationResult.FailureResult("Error al cambiar el estado de la notificacion: " + ex.Message);
             }
         }
     }

@@ -5,7 +5,7 @@
 namespace DgNotification.Migrations
 {
     /// <inheritdoc />
-    public partial class fixDefaultValueNotificacionAndPrecioUnitario : Migration
+    public partial class FixDefaultValueNotificacionAndPrecioUnitario : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DgNotification.DataAccess.Interfaces
+namespace DgNotification.DataAccess.Interfaces.Repository
 {
-    public interface IGeneric<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         Task<clsOperationResult> GetAllAsync();
         Task<clsOperationResult> GetByIdAsync(int id);

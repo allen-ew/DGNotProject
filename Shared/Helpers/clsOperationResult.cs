@@ -12,18 +12,19 @@ namespace DgNotification.Shared.Helpers
         public string Message { get; set; }
         public object Data { get; set; }
 
-        private clsOperationResult (bool prmSucess, string prmMessage, object prmData = null)
+        private clsOperationResult (bool prmSucess, string prmMessage = null , object prmData = null)
         {
             Success = prmSucess;
             Message = prmMessage;
             Data = prmData;
         }
-        
-        public static clsOperationResult SuccessResult(string prmMessage,object prmData = null)
+
+
+        public static clsOperationResult SuccessResult(string prmMessage = null,object prmData = null)
         {
             return new clsOperationResult(true, prmMessage, prmData);
         }
-        public static clsOperationResult FailureResult(string prmMessage, object prmData = null)
+        public static clsOperationResult FailureResult(string prmMessage = null, object prmData = null)
         {
             return new clsOperationResult(false, prmMessage, prmData);
         }

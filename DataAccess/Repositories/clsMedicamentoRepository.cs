@@ -1,4 +1,4 @@
-﻿using DgNotification.DataAccess.Interfaces;
+﻿using DgNotification.DataAccess.Interfaces.Repository;
 using DgNotification.DataAccess.Models;
 using DgNotification.Shared.Helpers;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace DgNotification.DataAccess.Repositories
 {
-    public class clsMedicamentoRepository : IGeneric<clsMedicamento>
+    public class clsMedicamentoRepository : IMedicamentoRepository
     {
         private readonly clsDGNotiDBContext _context;
 
@@ -77,6 +77,22 @@ namespace DgNotification.DataAccess.Repositories
             {
 
                 return clsOperationResult.FailureResult("Error al agregar un Medicamento: " + ex.Message);
+            }
+        }
+        public async Task<clsOperationResult> CambiarEstado(int id, bool estado)
+        {
+            try
+            {
+                var vMedicamento = await _context.Medicamentos.FindAsync(id);
+                if (vMedicamento == null) return clsOperationResult.FailureResult("El medicamento no existe.");
+                vMedicamento.Activo = estado;
+                _context.Medicamentos.Update(vMedicamento);
+                await _context.SaveChangesAsync();
+                return clsOperationResult.SuccessResult("El estado del medicamento fue cambiado correctamente.", vMedicamento);
+            }
+            catch (Exception ex)
+            {
+                return clsOperationResult.FailureResult("Error al cambiar el estado del medicamento: " + ex.Message);
             }
         }
     }
