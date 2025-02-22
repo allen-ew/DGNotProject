@@ -60,11 +60,11 @@ namespace DgNotification
                     services.AddScoped<INotificacionService, clsNotificacionService>();
 
                     // Registrar el formulario principal
-                    services.AddScoped<Form1>();
+                    services.AddScoped<FormMain>();
                 })
                 .Build();
 
-            var form1 = host.Services.GetRequiredService<Form1>();
+            var form1 = host.Services.GetRequiredService<FormMain>();
 
             Application.Run(form1);
         }
