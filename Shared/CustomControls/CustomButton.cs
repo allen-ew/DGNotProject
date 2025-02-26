@@ -9,16 +9,19 @@ namespace DgNotification.Shared.CustomControls
 {
     public class CustomButton : Button
     {
+        #region Properties
         private int borderSize = 0;
         private int borderRadius = 20;
         private Color borderColor = Color.PaleVioletRed;
-
+        #endregion
+        #region Accessors
         public int BorderSize { get => borderSize; set { borderSize = value; this.Invalidate(); } }
         public int BorderRadius { get => borderRadius; set { borderRadius = value; this.Invalidate(); } }
         public Color BorderColor { get => borderColor; set { borderColor = value; this.Invalidate(); } }
         public Color BackgroundColor { get => this.BackColor; set { this.BackColor = value;} }
         public Color TextColor { get => this.ForeColor; set { this.ForeColor = value;} }
-
+        #endregion
+        #region Constructor
         public CustomButton()
         {
             this.FlatStyle = FlatStyle.Flat;
@@ -28,6 +31,8 @@ namespace DgNotification.Shared.CustomControls
             this.ForeColor = Color.White;
             this.Resize += new EventHandler(Button_Resize);
         }
+        #endregion
+        #region Private Methods
         private void Button_Resize(object? sender, EventArgs e)
         {
             if (borderRadius > this.Height)
@@ -46,6 +51,12 @@ namespace DgNotification.Shared.CustomControls
             path.CloseFigure();
             return path;
         }
+        private void Container_BackColorChanged(object? sender, EventArgs e)
+        {
+            this.Invalidate();
+        }
+        #endregion
+        #region Overriden Methods
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
@@ -95,9 +106,7 @@ namespace DgNotification.Shared.CustomControls
                 this.Parent.BackColorChanged += new EventHandler(Container_BackColorChanged);
             }
         }
-        private void Container_BackColorChanged(object? sender, EventArgs e)
-        {
-            this.Invalidate();
-        }
+        #endregion
+
     }
 }

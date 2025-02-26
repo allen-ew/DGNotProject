@@ -9,23 +9,26 @@ namespace DgNotification.Shared.CustomControls
 {
     public class CustomToggleButton : CheckBox
     {
+        #region Properties
         private Color onBackColor = Color.MediumSlateBlue;
         private Color onToggleColor = Color.WhiteSmoke;
         private Color offBackColor = Color.LightGray;
         private Color offToggleColor = Color.WhiteSmoke;
+        #endregion
 
+        #region Accessors
         public Color OnBackColor { get => onBackColor; set { onBackColor = value; this.Invalidate();} }
         public Color OnToggleColor { get => onToggleColor; set { onToggleColor = value; this.Invalidate(); } }
         public Color OffBackColor { get => offBackColor; set { offBackColor = value; this.Invalidate(); } }
         public Color OffToggleColor { get => offToggleColor; set { offToggleColor = value; this.Invalidate(); } }
-
+        #endregion
+        #region Constructor
         public CustomToggleButton()
         {
             this.MinimumSize = new Size(45, 22);
         }
-
-        //Methods
-
+        #endregion
+        #region Private Methods
         private GraphicsPath GetFigutePath()
         {
             int arcSize = this.Height - 1;
@@ -38,7 +41,8 @@ namespace DgNotification.Shared.CustomControls
             path.CloseFigure();
             return path;
         }
-
+        #endregion
+        #region Overriden Methods
         protected override void OnPaint(PaintEventArgs pevent)
         {
             int toggleSize = this.Height - 5;
@@ -58,5 +62,6 @@ namespace DgNotification.Shared.CustomControls
                     new Rectangle(2, 2, toggleSize, toggleSize));
             }
         }
+        #endregion
     }
 }
