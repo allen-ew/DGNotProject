@@ -57,6 +57,21 @@ namespace DgNotification.Shared.CustomControls
         }
         #endregion
         #region Overriden Methods
+         public override string Text
+    {
+        get => base.Text;
+        set
+        {
+            if (this.Image != null)
+            {
+                base.Text = value.StartsWith("     ") ? value : "     " + value;
+            }
+            else
+            {
+                base.Text = value;
+            }
+        }
+    }
         protected override void OnPaint(PaintEventArgs pevent)
         {
             base.OnPaint(pevent);
